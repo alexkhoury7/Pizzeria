@@ -14,11 +14,11 @@ def pizza_options(request):
 
 def pizza(request,pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
-    toppings = pizza.topping_set.all()
 
-    context = {'toppings':toppings}
-    template = loader.get_template('pizzas/pizza.html')
-    
+    toppings = Topping.objects.filter(pizza=pizza)
+
+    context = {'pizza':pizza, 'toppings':toppings}
+        
     return render(request, 'pizzas/pizza.html', context)
 
 def toppings(request, topping_id,pizza_id):
@@ -28,7 +28,9 @@ def toppings(request, topping_id,pizza_id):
     context = {'toppings':toppings,'pizza':pizza}
     return render(request, 'pizzas/pizza.html', context)
 
-def comments(request):    
+def comments(request,pizza_id):    
+    pizza = Pizza.objects.get(id=pizza_id)
+
     if request.method != 'POST':
         form = CommentForm()
     else:
@@ -36,11 +38,12 @@ def comments(request):
 
         if form.is_valid():
             comment = form.save(commit=False)
+            comment.pizza = pizza
             comment.save()
             
-            return redirect('pizzas:pizza_options')
+            return redirect('pizzas:pizza', pizza_id=pizza_id)
 
-    context = {'form':form,}
+    context = {'form':form, 'pizza':pizza}
     return render(request, 'pizzas/comments.html', context)
 
 

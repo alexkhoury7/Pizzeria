@@ -17,8 +17,8 @@ class Topping(models.Model):
         return self.topping_name
 
 class Comment(models.Model):
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=200)
-
+    pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
+    comment = models.TextField(max_length=200)
+    
     def __str__(self):
         return self.comment

@@ -8,5 +8,5 @@ urlpatterns = [
     path('',views.index, name='index'),
     path('pizza_options',views.pizza_options, name='pizza_options'),
     path('pizza_options/<int:pizza_id>/',views.pizza, name ='pizza'),
-     path('comments/',views.comments, name='comments'),
+     path('comments/<int:pizza_id>/',views.comments, name='comments'),
 ]
