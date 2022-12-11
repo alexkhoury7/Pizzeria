@@ -12,15 +12,17 @@
      {% empty %}
      <li> There are no toppings for this pizza </li>
      {% endfor %}
-     
+</ul>
+
+<a href="{% url 'pizzas:comments' pizza.id %}">Add comment</a>
+
+<ul>
      {% for c in comments %}
      <li> {{ c.comment }}</li>
+
+     {% empty %}
+     <li>No comments have been added.</li>
      {% endfor %}
-</ul>
-<ul>
-     <a href="{% url 'pizzas:comments' pizza.id %}">Add comment</a>
-     
-     
 </ul>
 
 {% endblock content %}
