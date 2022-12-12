@@ -4,7 +4,8 @@
 
 <p> Pizza: {{ pizza }} </p>
 
-<ul>
+
+<ul>x
      {% for t in toppings %}
 
      <li> {{ t.topping_name }} </li>
@@ -17,8 +18,8 @@
 <a href="{% url 'pizzas:comments' pizza.id %}">Add comment</a>
 
 <ul>
-     {% for c in comments %}
-     <li> {{ c.comments }}</li>
+     {% for c in comment %}
+     <li> {{ c }}</li>
 
      {% empty %}
      <li>No comments have been added.</li>
