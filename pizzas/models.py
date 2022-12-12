@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Pizza(models.Model):
     pizza_name = models.CharField(max_length=200)
-    image = models.ImageField(null=False, blank=True, upload_to="images/")
+    image = models.ImageField(upload_to="images/")
 
     def __str__(self):
         return self.pizza_name
@@ -19,7 +19,7 @@ class Topping(models.Model):
 
 class Comment(models.Model):
     pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=200)
+    comment = models.TextField(max_length=200)
     
     def __str__(self):
         return self.comment

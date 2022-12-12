@@ -16,8 +16,9 @@ def pizza(request,pizza_id):
     pizza = Pizza.objects.get(id=pizza_id)
 
     toppings = Topping.objects.filter(pizza=pizza)
+    comment = pizza.comment_set.all()
 
-    context = {'pizza':pizza, 'toppings':toppings}
+    context = {'pizza':pizza, 'toppings':toppings, 'comment':comment}
         
     return render(request, 'pizzas/pizza.html', context)
 
@@ -37,9 +38,9 @@ def comments(request,pizza_id):
         form = CommentForm(data=request.POST)
 
         if form.is_valid():
-            comment = form.save(commit=False)
-            comment.pizza = pizza
-            comment.save()
+            comments = form.save(commit=False)
+            comments.pizza = pizza
+            comments.save()
             
             return redirect('pizzas:pizza', pizza_id=pizza_id)
 

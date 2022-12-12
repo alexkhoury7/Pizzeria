@@ -4,8 +4,11 @@
 
 <p> Pizza: {{ pizza }} </p>
 
+<div>
+     <img src="{{ pizza.image.url }}" width = 400 height=auto/>
+</div>
 
-<ul>x
+<ul>
      {% for t in toppings %}
 
      <li> {{ t.topping_name }} </li>
